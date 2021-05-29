@@ -4,3 +4,34 @@ body {
   background-size: cover;
   overflow-x: hidden;
 }
+
+.placar {
+  width: 1366px;
+  height: 50px;
+  text-align: relative;
+  position: absolute;
+  top: 600px;
+  left: 80px;
+}
+
+.comida1,
+.comida2,
+.comida3,
+.comida4,
+.veneno1,
+.veneno2 {
+  width: 80px;
+  height: 90px;
+  position: absolute;
+  top: 348px;
+  left: 588px;
+}
+
+.jogar {
+  width: 1366px;
+  height: 50px;
+  text-align: relative;
+  position: relative;
+  top: 410px;
+  margin-left: 530px;
+}
