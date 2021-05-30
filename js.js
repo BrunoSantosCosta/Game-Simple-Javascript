@@ -18,19 +18,23 @@ function play() {
   const posicaoX7 = parseInt(Math.random() * 1250);
   const velocidade = 3;
 
-  const TECLA = {
-    W: 87,
-    S: 83,
-    D: 68,
-    A: 65,
-    SD: 39,
-    SE: 37,
-  };
-
   const game = {};
   game.pressionou = [];
 
-  function timer() {
-    game.timer = setInterval(loop, 10);
-  }
+  let obj = document.getElementById('ruffles');
+  let px = 0;
+  window.addEventListener('keydown', (e) => {
+    let tecla = e.key;
+    switch (tecla) {
+      case 'ArrowRight':
+        px += 80;
+
+        obj.style.transform = `translateX(${px}px)`;
+        break;
+      case 'ArrowLeft':
+        px -= 80;
+        obj.style.transform = `translateX(${px}px)`;
+        break;
+    }
+  });
 }
