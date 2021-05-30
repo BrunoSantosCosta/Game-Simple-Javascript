@@ -5,7 +5,6 @@
   <link rel="icon" href="img/logo.png" type="image/x-icon">
   <meta charset="utf-8">
   <title>Cozinha do Ruffles</title>
-  <script src="js/js.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
@@ -14,7 +13,7 @@
 
 
   <!-- Fazendo o Cenário -->
-  <div class="container">
+  <div class="container" id="minhaDiv">
 
     <div class="link jogador" alt="Jogador">
       <img src="./img/rufflesjogo.png" />
@@ -42,13 +41,11 @@
     </div>
     <div class="link placar"></div>
 
-    <div class="inicio" onclick="start()">
-      <h1>JOGAR</h1>
-    </div>
+
 
   </div>
 
-
+  <h1 type="button" class="inicio" onclick="invisivel('minhaDiv');play();">JOGAR</h1>
 
   </div>
 
