@@ -7,16 +7,16 @@ function invisivel(elements) {
 }
 
 function play() {
-  const score = 0;
-  const jogadorVida = 4;
-  const posicaoX1 = parseInt(Math.random() * 1250);
-  const posicaoX2 = parseInt(Math.random() * 1250);
-  const posicaoX3 = parseInt(Math.random() * 1250);
-  const posicaoX4 = parseInt(Math.random() * 1250);
-  const posicaoX5 = parseInt(Math.random() * 1250);
-  const posicaoX6 = parseInt(Math.random() * 1250);
-  const posicaoX7 = parseInt(Math.random() * 1250);
-  const velocidade = 3;
+  var score = 0;
+  var jogadorVida = 4;
+  var posicaoX1 = parseInt(Math.random() * 1250);
+  var posicaoX2 = parseInt(Math.random() * 1250);
+  var posicaoX3 = parseInt(Math.random() * 1250);
+  var posicaoX4 = parseInt(Math.random() * 1250);
+  var posicaoX5 = parseInt(Math.random() * 1250);
+  var posicaoX6 = parseInt(Math.random() * 1250);
+  var posicaoX7 = parseInt(Math.random() * 1250);
+  var velocidade = 3;
 
   const game = {};
   game.pressionou = [];
@@ -51,17 +51,11 @@ function play() {
     vida();
   }
 
-  function moveComida1() {
-    const posicaoY = parseInt(document.getElementById('comida1').style.top);
-    document.getElementById('comida1', posicaoY + velocidade).style.top;
-    document.getElementById('comida1', posicaoX1).style.left;
-
-    if (posicaoY >= 630) {
-      posicaX1 = parseInt(Math.random() * 1250);
-      document.getElementById('comida1', 10).style.top;
-      document.getElementById('comida1', posicaoX1).style.left;
-
-      score = score - 50;
+  function criaComida() {
+    if (play) {
+      var y = 0;
+      var x = Math.random() * 1250;
+      var comida = document.createElementNS('');
     }
   }
 }

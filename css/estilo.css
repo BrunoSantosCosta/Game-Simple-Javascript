@@ -6,6 +6,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .grid {
@@ -35,4 +36,9 @@ body {
 
 .ruffles {
   padding-top: 130px;
+}
+
+#comida1 {
+  background-image: url(../img/Comida1.png);
+  position: absolute;
 }
