@@ -37,4 +37,31 @@ function play() {
         break;
     }
   });
+
+  function loop() {
+    moveJogador();
+    moveComida1();
+    moveComida2();
+    //moveComida3();
+    //moveComida4();
+    moveVeneno1();
+    moveVeneno2();
+    colisao();
+    pontos();
+    vida();
+  }
+
+  function moveComida1() {
+    const posicaoY = parseInt(document.getElementById('comida1').style.top);
+    document.getElementById('comida1', posicaoY + velocidade).style.top;
+    document.getElementById('comida1', posicaoX1).style.left;
+
+    if (posicaoY >= 630) {
+      posicaX1 = parseInt(Math.random() * 1250);
+      document.getElementById('comida1', 10).style.top;
+      document.getElementById('comida1', posicaoX1).style.left;
+
+      score = score - 50;
+    }
+  }
 }
