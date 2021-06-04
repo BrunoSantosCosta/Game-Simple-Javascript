@@ -2,6 +2,9 @@ let dirxJ, velJ, pjx;
 let tamTelaW, tamTelaH;
 let jogo;
 let frames;
+let contComidas, painelContComidas, velC, tmpCriaComida;
+let comidasTotal;
+let vidaRuffles;
 
 function controlaJogador() {
   let obj = document.getElementById('ruffles');
@@ -18,24 +21,47 @@ function controlaJogador() {
     } else {
     }
   });
+
   gameLoop();
 }
-function criaComidas() {
-  let comidas_na_tela = document.getElementsByClassName('food');
-  comidas_na_tela = comidas_na_tela.length;
-  if (jogando && bmb_totais > 0 && bombas_na_tela < 5) {
-    let x = Math.random() * 440;
-    let y = -60;
-    x = parseInt(x);
 
-    let tela_comida = document.getElementsByClassName('food');
-    tela_comida.innerHTML += `<div class="food" style="background-position: ${x}px ${y}px;"></div>`;
+function criaComida() {
+  if (jogo) {
+    let y = 0;
+    let x = Math.random() * tamTelaW;
+    let comida = document.createElement('div');
+    let att1 = document.createAttribute('class');
+    let att2 = document.createAttribute('style');
+    att1.value = 'comida';
+    att2.value = 'top:' + y + 'px;left:' + x + 'px;';
+    comida.setAttributeNode(att1);
+    comida.setAttributeNode(att2);
+    document.body.appendChild(comida);
+    contComidas--;
+  }
+}
+
+function controlaComida() {
+  comidasTotal = document.getElementsByClassName('comida');
+  let tam = comidasTotal.length;
+  for (var i = 0; i < tam; i++) {
+    if (comidasTotal[i]) {
+      let pi = comidasTotal[i].offsetTop;
+      pi += velC;
+      comidasTotal[i].style.top = pi + 'px';
+      if (pi > tamTelaH) {
+        vidaRuffles -= 10;
+        comidasTotal[i].remove();
+      }
+    }
   }
 }
 
 function gameLoop() {
   if (jogo) {
     controlaJogador();
+    controlaComida();
+    criaComida();
   }
   frames = requestAnimationFrame(gameLoop);
 }
@@ -43,8 +69,19 @@ function gameLoop() {
 function play() {
   jogo = true;
 
+  //ini tela
+  tamTelaW = window.innerWidth;
+  tamTelaH = window.innerHeight;
+  //controle das comidas caindo
+  clearInterval(tmpCriaComida);
+  contComidas = 150;
+  velC = 3;
+  tmpCriaComida = setInterval(criaComida, 1700);
+
+  //controles do ruffles
+  vidaRuffles = 300;
+
   gameLoop();
 }
 
 window.addEventListener('load', play);
-tamTelaW = window.innerWidth;
