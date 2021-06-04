@@ -14,10 +14,10 @@ body {
 }
 
 .grid-auto-rows-1 {
-  grid-template-rows: 90px auto 90px;
+  grid-template-rows: 90px auto 300px;
 }
 
-.inicio {
+.btn-start {
   font-family: 'Indie Flower', cursive;
   font-size: 50px;
   font-weight: 900;
@@ -26,7 +26,7 @@ body {
   text-align: center;
 }
 
-.meio {
+.center {
   align-items: center;
   height: 100px;
 }
@@ -39,6 +39,14 @@ body {
 }
 
 #comida1 {
+  background-image: url(../img/Comida1.png) no-repeat;
+  background-size: 60px 60px;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+}
+.comida {
   background-image: url(../img/Comida1.png);
   position: absolute;
 }
