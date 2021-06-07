@@ -1,61 +1,60 @@
 let velC;
-let qtd_comidas, comidas_total, intv_cria;
-let vida_ruffles, pnt_perda, cmd_perda;
+let qtd_comidas, controlFood, timerC;
+let lifeRuffles, pointLost, foodLost;
 let barra_comida_w, cont_derrot, frames_derrota, opacity_derr;
 let vitoria, derrota;
 
 function play() {
-  let tela_ini = document.querySelector('.background');
-  let btns_ini = document.querySelector('#btnsHome');
-  let tela_jogo = document.querySelector('#screenGame');
-  let btns_jogo = document.querySelector('#btnsGame');
+  let screenHome = document.querySelector('.background');
+  let btnsHome = document.querySelector('#btnsHome');
+  let screenGame = document.querySelector('#screenGame');
+  let btnsGame = document.querySelector('#btnsGame');
 
-  tela_ini.style.animationName = 'ani-tela-ini';
-  btns_ini.style.animationName = 'ani-btns-ini';
+  screenHome.style.animationName = 'animationscreenHome';
+  btnsHome.style.animationName = 'animatinBtnsHome';
 
   setTimeout(function () {
     document.querySelector('.sectionHome').className = 'd-none';
     document.querySelector('#game').className = '';
-    tela_jogo.style.animationName = 'ani-tela-jogo';
-    btns_jogo.style.animationName = 'ani-btns-jogo';
+    screenGame.style.animationName = 'animationScreenGame';
+    btnsGame.style.animationName = 'animationBtnsGame';
 
-    document.getElementById('contagem').innerHTML = '1';
+    document.getElementById('timer').innerHTML = '1';
 
     setTimeout(function () {
-      document.getElementById('contagem').innerHTML = '2';
+      document.getElementById('timer').innerHTML = '2';
 
       setTimeout(function () {
-        document.getElementById('contagem').innerHTML = '3';
+        document.getElementById('timer').innerHTML = '3';
 
         setTimeout(function () {
-          document.getElementById('contagem').style.display = 'none';
-          jogando = true;
-          iniciarJogo();
+          document.getElementById('timer').style.display = 'none';
+          playing = true;
+          playGame();
         }, 1000);
       }, 1000);
     }, 1000);
   }, 400);
 }
 
-function iniciarJogo() {
-  jogador = document.getElementById('ruffles');
+function playGame() {
+  player = document.getElementById('ruffles');
 
   dirx = diry = 0;
   velC = 4;
   jogx = 225;
-  jogy = 400;
 
-  clearInterval(intv_cria);
+  clearInterval(timerC);
 
-  vida_ruffles = 200;
-  cmd_totais = 80;
-  cmd_perda = barra_comida_w / cmd_totais;
+  lifeRuffles = 200;
+  totalFood = 80;
+  foodLost = barra_comida_w / totalFood;
 
-  qtd_comidas = cmd_totais;
+  qtdFood = totalFood;
 
-  auxa = (qtd_comidas * 15) / 100;
-  pnt_perda = vida_ruffles / auxa;
-  intv_cria = setInterval(criarComida, 1);
+  auxa = (qtdFood * 15) / 100;
+  pointLost = lifeRuffles / auxa;
+  timerC = setInterval(criarComida, 1000);
 
   idt_cont = 0;
   idb_cont = 0;
@@ -71,14 +70,14 @@ function iniciarJogo() {
 
 function loopJogo() {
   if (vitoria == false && derrota == false) {
-    if (jogando) {
+    if (playing) {
       controleComida();
-      if (qtd_comidas == 0 && vida_ruffles > 0) {
+      if (qtdFood == 0 && lifeRuffles > 0) {
         vitoria = true;
-        jogando = false;
-      } else if (vida_ruffles == 0) {
+        playing = false;
+      } else if (lifeRuffles == 0) {
         derrota = true;
-        jogando = false;
+        playing = false;
       }
 
       frames = requestAnimationFrame(loopJogo);
@@ -144,28 +143,28 @@ window.addEventListener('keydown', (e) => {
 });
 
 function criarComida() {
-  let comidasCaindo = document.getElementsByClassName('comida');
-  comidasCaindo = comidasCaindo.length;
+  let downFood = document.getElementsByClassName('comida');
+  downFood = downFood.length;
 
-  if (jogando && cmd_totais > 0 && comidasCaindo < 5) {
+  if (playing && totalFood > 0 && downFood < 5) {
     let x = Math.random() * 943;
     let y = 0;
 
     x = parseInt(x);
 
-    let comidaTela = document.getElementById('comida');
-    comidaTela.innerHTML += `<div class="comida" style="background-position: ${x}px ${y}px;"></div>`;
-    cmd_totais--;
+    let screenFood = document.getElementById('comida');
+    screenFood.innerHTML += `<div class="comida" style="background-position: ${x}px ${y}px;"></div>`;
+    totalFood--;
   }
 }
 
 function controleComida() {
-  comidas_total = document.getElementsByClassName('comida');
-  let qtdb = comidas_total.length;
+  controlFood = document.getElementsByClassName('comida');
+  let qtdb = controlFood.length;
 
   for (var i = 0; i < qtdb; i++) {
-    if (comidas_total[i]) {
-      let pb = comidas_total[i].style.backgroundPosition;
+    if (controlFood[i]) {
+      let pb = controlFood[i].style.backgroundPosition;
       esp = pb.indexOf(' ');
 
       let x = parseInt(pb.slice(0, esp).replace('px', ''));
@@ -173,19 +172,19 @@ function controleComida() {
 
       y += velC;
 
-      comidas_total[i].style.backgroundPosition = `${x}px ${y}px`;
+      controlFood[i].style.backgroundPosition = `${x}px ${y}px`;
 
       if (y > 500) {
-        vida_ruffles -= pnt_perda;
+        lifeRuffles -= pointLost;
 
-        if (vida_ruffles < 1) {
-          vida_ruffles = 0;
+        if (lifeRuffles < 1) {
+          lifeRuffles = 0;
         }
         let rufinho = document.querySelector('#life');
-        rufinho.style.width = `${vida_ruffles}px`;
-        comidas_total[i].remove();
+        rufinho.style.width = `${lifeRuffles}px`;
+        controlFood[i].remove();
 
-        qtd_comidas--;
+        qtdFood--;
       }
     }
   }
