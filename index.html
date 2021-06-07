@@ -1,68 +1,72 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <link rel="icon" href="img/logo.png" type="image/x-icon">
-  <meta charset="utf-8">
-  <title>Kitchen of Ruffles</title>
-  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <title>Ruffles</title>
 </head>
 
 <body>
+  <section class="sectionHome">
+    <div class="home">
 
+      <div class="background">
+        <img src="img/background.png">
+      </div>
 
-
-  <!-- Fazendo o Cenário -->
-  <div class="grid grid-auto-rows-1" id="myId">
-    <div class="top">
-      <div id="painel">
-        Ruffles
-        <div id="medidorComidas">
-          <div id="barraComida"></div>
-        </div>
-        <div id="contComidas"></div>
+      <div id="btnsHome" class="btnMenu">
+        <button id="btn-p lay" onclick="play()">
+          <i class="fas fa-play"></i>
+        </button>
       </div>
     </div>
-    <div class="center">
+  </section>
+
+  <section id="game" class="d-none">
+    <div>
+      <div id="screenGame">
+        <div id="status">
+          <div id="life"></div>
+        </div>>
+        <div id="backGame"></div>
+        <div id="comida" class="camada"></div>
+        <div id="jogo" class="camada">
+          <div id="ruffles">
+          </div>
+        </div>
+        <div id="tela-reslt" class="d-none">
+          <div id="ruffleGame-reslt"></div>
+          <div id="text-reslt"></div>
+          <div id="brilho_derr"></div>
+        </div>
+
+        <div id="contagem" class="camada">1</div>
+
+
+
+      </div>
+
+      <!-- botoes jogo -->
+      <div id="btnsGame" class="btnMenu">
+        <button id="btnReset" onclick="reiniciarJogo()" disabled="disabled">
+          <i class="fas fa-redo-alt"></i>
+        </button>
+        <button id="btn-home" onclick="window.location.reload()">
+          <i class="fas fa-home"></i>
+        </button>
+      </div>
     </div>
-    <div class="footer">
-      <img src="img/rufflesjogo.png" class="ruffles" id="ruffles" />
-
-    </div>
-  </div>
-
-
-
-
-
-  <!--
-      <div class="link">
-      <img src="img/Comida1.png" id="comida1" class="comida1">
-    </div>
-    <div class="link comida2">
-      <img src="img/Comida2.png">
-    </div>
-    <div class="link comida3">
-      <img src="img/Comida3.png">
-    </div>
-    <div class="link comida4">
-      <img src="img/Comida4.png">
-    </div>
-    <div class="link veneno1">
-      <img src="./img/Veneno1.png">
-    </div>
-    <div class="link veneno2">
-      <img src="./img/Veneno2.png">
-    </div>
-    -->
-
-
-
+  </section>
 
 
 
 
   <script src="js.js"></script>
+
 </body>
 
 </html>
