@@ -1,8 +1,21 @@
 let velC;
 let qtd_comidas, controlFood, timerC;
-let lifeRuffles, pointLost, foodLost;
-let barra_comida_w, cont_derrot, frames_derrota, opacity_derr;
+let lifeRuffles, pointLost;
+let cont_derrot, frames_derrota, opacity_derr;
 let vitoria, derrota;
+
+function playPopup(popupId) {
+  const popup = document.getElementById(popupId);
+  popup.classList.add('show');
+  popup.addEventListener('click', (e) => {
+    if (e.target.id == 'popup-instructions' || e.target.className == 'close') {
+      popup.classList.remove('show');
+      localStorage.closePopup = popupId;
+    }
+  });
+}
+
+playPopup('popup-instructions');
 
 function play() {
   let screenHome = document.querySelector('.background');
@@ -48,12 +61,11 @@ function playGame() {
 
   lifeRuffles = 200;
   totalFood = 80;
-  foodLost = barra_comida_w / totalFood;
 
   qtdFood = totalFood;
 
   auxa = (qtdFood * 15) / 100;
-  pointLost = lifeRuffles / auxa;
+  pointLost = lifeRuffles - auxa;
   timerC = setInterval(criarComida, 1000);
 
   idt_cont = 0;
@@ -174,7 +186,7 @@ function controleComida() {
 
       controlFood[i].style.backgroundPosition = `${x}px ${y}px`;
 
-      if (y > 500) {
+      if (y > 847) {
         lifeRuffles -= pointLost;
 
         if (lifeRuffles < 1) {

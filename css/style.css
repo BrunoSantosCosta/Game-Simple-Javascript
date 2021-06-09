@@ -2,7 +2,14 @@
 
 html {
   height: 100%;
-  background: linear-gradient(145deg, #dadada, #3b3b3b);
+  background: rgb(1, 31, 38);
+  background: linear-gradient(
+    353deg,
+    rgba(1, 31, 38, 0.76234243697479) 7%,
+    rgba(242, 187, 22, 0.7259278711484594) 27%,
+    rgba(4, 49, 51, 0.6166841736694677) 51%,
+    rgba(37, 217, 184, 0.6082808123249299) 87%
+  );
   box-sizing: border-box;
   font-family: 'Sen', 'TW Cen MT', sans-serif;
   overflow: hidden;
@@ -27,8 +34,8 @@ body {
 }
 
 .camada {
-  width: 500px;
-  height: 500px;
+  width: 1400px;
+  height: 847px;
   position: absolute;
   top: 0;
   left: 0;
@@ -37,15 +44,16 @@ body {
 /* ---- -- -- TELA INICIAL -- -- ---- */
 
 .background {
+  background-image: url(../img/background.png);
   position: relative;
-  width: 943px;
-  height: 500px;
+  width: 1400px;
+  height: 847px;
   box-shadow: 0 0 15px -5px #000000;
   z-index: 1;
 }
 
 .btnMenu {
-  width: 943px;
+  width: 1400px;
   height: 70px;
   padding: 10px 40px 10px;
   display: flex;
@@ -80,12 +88,70 @@ body {
   text-shadow: 0 0 5px #2f2f2f50;
 }
 
+/* ---- -- -- POP UP DE INSTRUÇÕES  -- -- ---- */
+.popup-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-container.show {
+  display: flex;
+}
+
+.pop-up {
+  background: white;
+  width: 60%;
+  min-width: 300px;
+  padding: 40px;
+  border: 10px solid;
+  box-shadow: 0 0 0 10px white;
+  position: relative;
+}
+
+@keyframes pop-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.show .pop-up {
+  animation: pop-up 3s;
+}
+
+.close {
+  position: absolute;
+  font-size: 20px;
+  top: -30px;
+  right: -30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  border: 4px solid white;
+  cursor: pointer;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
 /* ---- -- -- TELA JOGO -- -- ---- */
 #screenGame {
+  background-image: url(../img/background.png);
   position: relative;
-  width: 943px;
-  height: 500px;
-  box-shadow: 0 0 15px -5px #000000;
+  width: 1400px;
+  height: 847px;
+  box-shadow: 0 0 15px -5px #0a0a0a50;
   z-index: 1;
 }
 
@@ -100,15 +166,16 @@ body {
 }
 
 .jogo {
-  text-align: center;
+  max-width: 1400px;
 }
 #ruffles {
-  width: 110px;
-  height: 110px;
+  width: 150px;
+  height: 200px;
   background: url('../img/rufflesjogo.png') no-repeat bottom center;
-  background-size: 110px 110px;
+  background-size: 150px 200px;
   position: absolute;
   bottom: 0;
+  max-width: 1400px;
 }
 @keyframes animationScreenGame {
   from {
@@ -149,8 +216,8 @@ body {
 .comida {
   background-image: url(../img/Comida1.png);
   background-repeat: no-repeat;
-  width: 943px;
-  height: 500px;
+  width: 1400px;
+  height: 847px;
   position: absolute;
   top: 0;
   left: 0;
