@@ -1,8 +1,10 @@
 let velC;
-let qtd_comidas, controlFood, timerC;
+let controlFood, timerC;
 let lifeRuffles, pointLost;
 let cont_derrot, frames_derrota, opacity_derr;
 let vitoria, derrota;
+let slider, imgAtual, maxImg, tmp;
+let imgs = [];
 
 function playPopup(popupId) {
   const popup = document.getElementById(popupId);
@@ -16,6 +18,43 @@ function playPopup(popupId) {
 }
 
 playPopup('popup-instructions');
+
+function preReload() {
+  var skin = 1;
+  for (var i = 0; i < 5; i++) {
+    imgs[i] = new Image();
+    imgs[i].src = 'img/skin' + skin + '.png';
+    skin++;
+  }
+  if (i == 5) {
+    imgs;
+  }
+}
+
+function loadSlides(img) {
+  slider.style.background = 'url(' + imgs[img].src + ')no-repeat';
+  slider.style.backgroundPosition = 'center';
+}
+
+function go() {
+  preReload();
+  imgAtual = 0;
+  maxImage = imgs.length - 1;
+  slider = document.querySelector('.dvslider');
+  loadSlides(imgAtual);
+  tmp = setInterval(replacement, 2000);
+}
+
+function replacement() {
+  imgAtual++;
+
+  if (imgAtual > maxImg) {
+    imgAtual = 0;
+  }
+  loadSlides(imgAtual);
+}
+
+window.addEventListener('load', go);
 
 function play() {
   let screenHome = document.querySelector('.background');
@@ -155,10 +194,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 function criarComida() {
-  let downFood = document.getElementsByClassName('comida');
-  downFood = downFood.length;
-
-  if (playing && totalFood > 0 && downFood < 5) {
+  if (playing) {
     let x = Math.random() * 943;
     let y = 0;
 
@@ -169,7 +205,24 @@ function criarComida() {
     totalFood--;
   }
 }
+/*
+function preReload() {
+  var skin = 1;
+  for (var i = 0; i < 5; i++) {
+    imgs[i] = new Image();
+    imgs[i].src = 'img/skin' + skin + '.png';
+    skin++;
+  }
+  if (i == 5) {
+    imgs;
+  }
+}
 
+function loadSlides(img) {
+  slider.style.background = 'url(' + imgs[img].src + ')no-repeat';
+  slider.style.backgroundPosition = 'center';
+}
+*/
 function controleComida() {
   controlFood = document.getElementsByClassName('comida');
   let qtdb = controlFood.length;
@@ -195,8 +248,6 @@ function controleComida() {
         let rufinho = document.querySelector('#life');
         rufinho.style.width = `${lifeRuffles}px`;
         controlFood[i].remove();
-
-        qtdFood--;
       }
     }
   }
