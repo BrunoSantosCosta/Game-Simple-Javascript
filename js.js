@@ -1,5 +1,5 @@
 let velC;
-let controlFood, timerC;
+let controlFood, controlFood2, controlFood3, controlFood4, timerC;
 let lifeRuffles, pointLost;
 let cont_derrot, frames_derrota, opacity_derr;
 let vitoria, derrota;
@@ -23,7 +23,7 @@ function preReload() {
   var skin = 1;
   for (var i = 0; i < 5; i++) {
     imgs[i] = new Image();
-    imgs[i].src = 'img/skin' + skin + '.png';
+    imgs[i] = 'img/skin' + skin + '.png';
     skin++;
   }
   if (i == 5) {
@@ -32,7 +32,7 @@ function preReload() {
 }
 
 function loadSlides(img) {
-  slider.style.background = 'url(' + imgs[img].src + ')no-repeat';
+  slider.style.background = 'url(' + imgs[img] + ')no-repeat';
   slider.style.backgroundPosition = 'center';
 }
 
@@ -106,6 +106,7 @@ function playGame() {
   auxa = (qtdFood * 15) / 100;
   pointLost = lifeRuffles - auxa;
   timerC = setInterval(criarComida, 1000);
+  timerC2 = setInterval(criarComidaDois, 1000);
 
   idt_cont = 0;
   idb_cont = 0;
@@ -123,6 +124,7 @@ function loopJogo() {
   if (vitoria == false && derrota == false) {
     if (playing) {
       controleComida();
+      controleComidaDois();
       if (qtdFood == 0 && lifeRuffles > 0) {
         vitoria = true;
         playing = false;
@@ -134,7 +136,7 @@ function loopJogo() {
       frames = requestAnimationFrame(loopJogo);
     }
   } else {
-    document.querySelector('#comida').innerHTML = '';
+    document.querySelector('#foodOne').innerHTML = '';
 
     let jogo = document.querySelector('#jogo');
     let status = document.querySelector('#status');
@@ -193,6 +195,37 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+function criarComidaDois() {
+  if (playing) {
+    let x2 = Math.random() * 943;
+    let y2 = 0;
+
+    x2 = parseInt(x2);
+
+    let screenFood2 = document.getElementById('foodTWO');
+    screenFood2.innerHTML += `<div class="foodTWOO" style="background-position: ${x2}px ${y2}px;"></div>`;
+  }
+}
+
+function controleComidaDois() {
+  controlFood2 = document.getElementsByClassName('foodTWO');
+  let qtdb = controlFood2.length;
+
+  for (var i = 0; i < qtdb; i++) {
+    if (controlFood2[i]) {
+      let pb2 = controlFood2[i].style.backgroundPosition;
+      esp2 = pb2.indexOf(' ');
+
+      let x2 = parseInt(pb2.slice(0, esp2).replace('px', ''));
+      let y2 = parseInt(pb2.slice(esp2, pb2.length).replace('px', ''));
+
+      y2 += velC;
+
+      controlFood2[i].style.backgroundPosition = `${x2}px ${y2}px`;
+    }
+  }
+}
+
 function criarComida() {
   if (playing) {
     let x = Math.random() * 943;
@@ -205,24 +238,7 @@ function criarComida() {
     totalFood--;
   }
 }
-/*
-function preReload() {
-  var skin = 1;
-  for (var i = 0; i < 5; i++) {
-    imgs[i] = new Image();
-    imgs[i].src = 'img/skin' + skin + '.png';
-    skin++;
-  }
-  if (i == 5) {
-    imgs;
-  }
-}
 
-function loadSlides(img) {
-  slider.style.background = 'url(' + imgs[img].src + ')no-repeat';
-  slider.style.backgroundPosition = 'center';
-}
-*/
 function controleComida() {
   controlFood = document.getElementsByClassName('comida');
   let qtdb = controlFood.length;

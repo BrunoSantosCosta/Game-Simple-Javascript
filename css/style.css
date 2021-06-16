@@ -240,7 +240,7 @@ h2 {
 #ruffles {
   width: 85px;
   height: 135px;
-  background: url('../img/rufflesjogo.png') no-repeat bottom center;
+  background: url('../img/skin1.png') no-repeat bottom center;
   background-size: 85px 135px;
   position: absolute;
   bottom: 0;
@@ -281,8 +281,38 @@ h2 {
   }
 }
 
-.comida {
+.ingredientONE {
   background-image: url(../img/Comida1.png);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 447px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ingredientTWO {
+  background-image: url(../img/Comida2.png);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 447px;
+  position: absolute;
+  top: -80;
+  left: 0;
+}
+
+.ingredientTHREE {
+  background-image: url(../img/Comida3.png);
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 447px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ingredientFOUR {
+  background-image: url(../img/Comida4.png);
   background-repeat: no-repeat;
   width: 1000px;
   height: 447px;
