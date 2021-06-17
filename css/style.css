@@ -161,15 +161,14 @@ h2 {
   width: 60%;
   height: 70%;
   min-width: 300px;
-  padding: 40px;
   border: 10px solid;
   box-shadow: 0 0 0 10px;
   position: relative;
   display: flex;
 }
-.lado1,
-.lado2 {
-  flex-wrap: 30%;
+.sideLeft,
+.sideRight {
+  width: 50%;
 }
 
 @keyframes pop-up {
@@ -297,7 +296,7 @@ h2 {
   width: 1000px;
   height: 447px;
   position: absolute;
-  top: -80;
+  top: 0;
   left: 0;
 }
 

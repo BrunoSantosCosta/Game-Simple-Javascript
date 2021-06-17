@@ -105,8 +105,10 @@ function playGame() {
 
   auxa = (qtdFood * 15) / 100;
   pointLost = lifeRuffles - auxa;
-  timerC = setInterval(criarComida, 1000);
-  timerC2 = setInterval(criarComidaDois, 1000);
+  timerC = setInterval(criarComida, 1500);
+  timerC2 = setInterval(criarComidaDois, 1500);
+  timerC3 = setInterval(criarComidaTres, 1500);
+  timerC4 = setInterval(criarComidaQuatro, 1500);
 
   idt_cont = 0;
   idb_cont = 0;
@@ -125,6 +127,9 @@ function loopJogo() {
     if (playing) {
       controleComida();
       controleComidaDois();
+      controleComidaTres();
+      controleComidaQuatro();
+
       if (qtdFood == 0 && lifeRuffles > 0) {
         vitoria = true;
         playing = false;
@@ -136,8 +141,6 @@ function loopJogo() {
       frames = requestAnimationFrame(loopJogo);
     }
   } else {
-    document.querySelector('#foodOne').innerHTML = '';
-
     let jogo = document.querySelector('#jogo');
     let status = document.querySelector('#status');
 
@@ -202,13 +205,13 @@ function criarComidaDois() {
 
     x2 = parseInt(x2);
 
-    let screenFood2 = document.getElementById('foodTWO');
-    screenFood2.innerHTML += `<div class="foodTWOO" style="background-position: ${x2}px ${y2}px;"></div>`;
+    let screenFood2 = document.getElementById('ingredientTWO');
+    screenFood2.innerHTML += `<div class="ingredientTWO" style="background-position: ${x2}px ${y2}px;"></div>`;
   }
 }
 
 function controleComidaDois() {
-  controlFood2 = document.getElementsByClassName('foodTWO');
+  controlFood2 = document.getElementsByClassName('ingredientTWO');
   let qtdb = controlFood2.length;
 
   for (var i = 0; i < qtdb; i++) {
@@ -225,6 +228,66 @@ function controleComidaDois() {
     }
   }
 }
+function criarComidaTres() {
+  if (playing) {
+    let x3 = Math.random() * 943;
+    let y3 = 0;
+
+    x3 = parseInt(x3);
+
+    let screenFood3 = document.getElementById('ingredientTHREE');
+    screenFood3.innerHTML += `<div class="ingredientTHREE" style="background-position: ${x3}px ${y3}px;"></div>`;
+  }
+}
+
+function controleComidaTres() {
+  controlFood3 = document.getElementsByClassName('ingredientTHREE');
+  let qtdb = controlFood3.length;
+
+  for (var i = 0; i < qtdb; i++) {
+    if (controlFood3[i]) {
+      let pb3 = controlFood3[i].style.backgroundPosition;
+      esp3 = pb3.indexOf(' ');
+
+      let x3 = parseInt(pb3.slice(0, esp3).replace('px', ''));
+      let y3 = parseInt(pb3.slice(esp3, pb3.length).replace('px', ''));
+
+      y3 += velC;
+
+      controlFood3[i].style.backgroundPosition = `${x3}px ${y3}px`;
+    }
+  }
+}
+function criarComidaQuatro() {
+  if (playing) {
+    let x4 = Math.random() * 943;
+    let y4 = 0;
+
+    x4 = parseInt(x4);
+
+    let screenFood4 = document.getElementById('ingredientFOUR');
+    screenFood4.innerHTML += `<div class="ingredientFOUR" style="background-position: ${x4}px ${y4}px;"></div>`;
+  }
+}
+
+function controleComidaQuatro() {
+  controlFood4 = document.getElementsByClassName('ingredientFOUR');
+  let qtdb = controlFood4.length;
+
+  for (var i = 0; i < qtdb; i++) {
+    if (controlFood4[i]) {
+      let pb4 = controlFood4[i].style.backgroundPosition;
+      esp4 = pb4.indexOf(' ');
+
+      let x4 = parseInt(pb4.slice(0, esp4).replace('px', ''));
+      let y4 = parseInt(pb4.slice(esp4, pb4.length).replace('px', ''));
+
+      y4 += velC;
+
+      controlFood4[i].style.backgroundPosition = `${x4}px ${y4}px`;
+    }
+  }
+}
 
 function criarComida() {
   if (playing) {
@@ -233,14 +296,14 @@ function criarComida() {
 
     x = parseInt(x);
 
-    let screenFood = document.getElementById('comida');
-    screenFood.innerHTML += `<div class="comida" style="background-position: ${x}px ${y}px;"></div>`;
+    let screenFood = document.getElementById('ingredientONE');
+    screenFood.innerHTML += `<div class="ingredientONE" style="background-position: ${x}px ${y}px;"></div>`;
     totalFood--;
   }
 }
 
 function controleComida() {
-  controlFood = document.getElementsByClassName('comida');
+  controlFood = document.getElementsByClassName('ingredientONE');
   let qtdb = controlFood.length;
 
   for (var i = 0; i < qtdb; i++) {
