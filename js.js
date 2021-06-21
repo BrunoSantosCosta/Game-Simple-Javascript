@@ -1,9 +1,10 @@
-let velC;
-let controlFood, controlFood2, controlFood3, controlFood4, timerC;
-let lifeRuffles, pointLost;
-let cont_derrot, frames_derrota, opacity_derr;
+let velC, getIngredient;
+let timerC, timerC2, timerC3, timerC4;
+let controlFood, controlFood2, controlFood3, controlFood4;
+let lifeRuffles, score;
 let vitoria, derrota;
 let slider, imgAtual, maxImg, tmp;
+let player;
 let imgs = [];
 
 function playPopup(popupId) {
@@ -90,30 +91,20 @@ function play() {
 }
 
 function playGame() {
-  player = document.getElementById('ruffles');
-
-  dirx = diry = 0;
-  velC = 4;
-  jogx = 225;
+  velC = 1;
 
   clearInterval(timerC);
+  clearInterval(timerC2);
+  clearInterval(timerC3);
+  clearInterval(timerC4);
 
   lifeRuffles = 200;
-  totalFood = 80;
+  score = 0;
 
-  qtdFood = totalFood;
-
-  auxa = (qtdFood * 15) / 100;
-  pointLost = lifeRuffles - auxa;
-  timerC = setInterval(criarComida, 1500);
-  timerC2 = setInterval(criarComidaDois, 1500);
-  timerC3 = setInterval(criarComidaTres, 1500);
-  timerC4 = setInterval(criarComidaQuatro, 1500);
-
-  idt_cont = 0;
-  idb_cont = 0;
-  cont_derrot = 1;
-  opacity_derr = 0.8;
+  timerC = setInterval(criarComida, 3500);
+  timerC2 = setInterval(criarComidaDois, 3000);
+  timerC3 = setInterval(criarComidaTres, 3000);
+  timerC4 = setInterval(criarComidaQuatro, 3000);
 
   derrota = false;
   vitoria = false;
@@ -130,10 +121,7 @@ function loopJogo() {
       controleComidaTres();
       controleComidaQuatro();
 
-      if (qtdFood == 0 && lifeRuffles > 0) {
-        vitoria = true;
-        playing = false;
-      } else if (lifeRuffles == 0) {
+      if (lifeRuffles == 0) {
         derrota = true;
         playing = false;
       }
@@ -185,14 +173,28 @@ function loopJogo() {
 
 let obj = document.getElementById('ruffles');
 let px = 0;
+let tecla;
+
 window.addEventListener('keydown', (e) => {
-  let tecla = e.key;
+  tecla = e.key;
   if (tecla == 'ArrowRight') {
     px += 30;
 
     obj.style.transform = `translateX(${px}px)`;
   } else if (tecla == 'ArrowLeft') {
     px -= 30;
+    obj.style.transform = `translateX(${px}px)`;
+  } else {
+  }
+});
+window.addEventListener('keyup', (e) => {
+  tecla = e.key;
+  if (tecla == 'ArrowRight') {
+    px == 0;
+
+    obj.style.transform = `translateX(${px}px)`;
+  } else if (tecla == 'ArrowLeft') {
+    px == 0;
     obj.style.transform = `translateX(${px}px)`;
   } else {
   }
@@ -213,7 +215,6 @@ function criarComidaDois() {
 function controleComidaDois() {
   controlFood2 = document.getElementsByClassName('ingredientTWO');
   let qtdb = controlFood2.length;
-
   for (var i = 0; i < qtdb; i++) {
     if (controlFood2[i]) {
       let pb2 = controlFood2[i].style.backgroundPosition;
@@ -255,6 +256,9 @@ function controleComidaTres() {
       y3 += velC;
 
       controlFood3[i].style.backgroundPosition = `${x3}px ${y3}px`;
+      if (y3 > 500) {
+        controlFood3[i].remove();
+      }
     }
   }
 }
@@ -285,6 +289,9 @@ function controleComidaQuatro() {
       y4 += velC;
 
       controlFood4[i].style.backgroundPosition = `${x4}px ${y4}px`;
+      if (y4 > 500) {
+        controlFood4[i].remove();
+      }
     }
   }
 }
@@ -298,12 +305,27 @@ function criarComida() {
 
     let screenFood = document.getElementById('ingredientONE');
     screenFood.innerHTML += `<div class="ingredientONE" style="background-position: ${x}px ${y}px;"></div>`;
-    totalFood--;
   }
 }
 
 function controleComida() {
+  var player = document.getElementById('ruffles').getBoundingClientRect();
+  var food = document.getElementById('ingredientONE').getBoundingClientRect();
   controlFood = document.getElementsByClassName('ingredientONE');
+  var ptRuffles = [
+    { x: player.left, y: player.top },
+    { x: player.left + player.width, y: player.top },
+    { x: player.left + player.width, y: player.top + player.height },
+    { x: player.left, y: player.top + player.height },
+  ];
+
+  var ptFood = [
+    { x: food.left, y: food.top },
+    { x: food.left + food.width, y: food.top },
+    { x: food.left + food.width, y: food.top + food.height },
+    { x: food.left, y: food.top + food.height },
+  ];
+  console.log(ptFood);
   let qtdb = controlFood.length;
 
   for (var i = 0; i < qtdb; i++) {
@@ -315,19 +337,22 @@ function controleComida() {
       let y = parseInt(pb.slice(esp, pb.length).replace('px', ''));
 
       y += velC;
-
       controlFood[i].style.backgroundPosition = `${x}px ${y}px`;
 
-      if (y > 847) {
-        lifeRuffles -= pointLost;
-
-        if (lifeRuffles < 1) {
-          lifeRuffles = 0;
-        }
-        let rufinho = document.querySelector('#life');
-        rufinho.style.width = `${lifeRuffles}px`;
-        controlFood[i].remove();
+      /*
+      if (
+        (ptRuffles.x >= food.left &&
+          ptRuffles.x <= food.left + food.width &&
+          ptRuffles.y >= food.top &&
+          ptRuffles.y <= food.top + food.height) ||
+        (ptFood.x >= player.left &&
+          ptFood.x <= player.left + player.width &&
+          ptFood.y >= player.top &&
+          ptFood.y <= player.top + player.height)
+      ) {
+        alert('deu bom');
       }
+      */
     }
   }
 }
